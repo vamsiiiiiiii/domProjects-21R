@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <p>Try to guess the number between 1 and 100!</p>
+
+    <input type="number" id="userGuess" placeholder="Enter your guess" min="1" max="100" style="border: none; outline: none; width: 200px;">
+    <button onclick="checkGuess()">Guess</button>
+
+    <div class="message" id="message"></div>
+    <div class="score" id="score">Attempts: 0</div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById("userGuess").value);
+            const message = document.getElementById("message");
+            const score = document.getElementById("score");
+
+            attempts++;
+            if (userGuess === randomNumber) {
+                message.textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+                message.style.color = "green";
+            } else if (userGuess < randomNumber) {
+                message.textContent = "Too low! Try again.";
+                message.style.color = "red";
+            } else if (userGuess > randomNumber) {
+                message.textContent = "Too high! Try again.";
+                message.style.color = "red";
+            }
+
+            score.textContent = `Attempts: ${attempts}`;
+            document.getElementById("userGuess").value = ""; // Clear input after guess
+        }
+    </script>
+</body>
+</html>
